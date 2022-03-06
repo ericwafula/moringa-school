@@ -49,4 +49,6 @@ public class Student {
             nullable = false
     )
     private Integer admissionNumber;
+    @Column(name = "course_id")
+    private Long courseId;
 }
