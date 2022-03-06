@@ -14,10 +14,16 @@ import javax.persistence.*;
 @Builder
 @Table(
         name = "student",
-        uniqueConstraints = @UniqueConstraint(
-                name = "email_unique",
-                columnNames = "student_email"
-        )
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "email_unique",
+                        columnNames = "student_email"
+                ),
+                @UniqueConstraint(
+                        name = "admission_number_unique",
+                        columnNames = "admission_number"
+                )
+        }
 )
 public class Student {
     @Id()
@@ -38,4 +44,9 @@ public class Student {
             nullable = false
     )
     private String email;
+    @Column(
+            name = "admission_number",
+            nullable = false
+    )
+    private Integer admissionNumber;
 }

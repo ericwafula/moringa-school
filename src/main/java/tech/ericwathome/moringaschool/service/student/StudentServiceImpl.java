@@ -34,8 +34,8 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> allStudents() {
         List<Student> allStudents = studentRepository.findAll();
         Student emptyStudent = Student.builder()
-                .name("Empty List")
-                .email("Empty List")
+                .name("No student found")
+                .email("No student found")
                 .build();
         List<Student> emptyStudentList = new ArrayList<>();
         emptyStudentList.add(emptyStudent);
