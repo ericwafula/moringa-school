@@ -31,6 +31,7 @@ public class Course {
             strategy = GenerationType.SEQUENCE,
             generator = "course_sequence"
     )
+    @Column(name = "id")
     private Long id;
     @Column(
             name = "course_name",
@@ -40,6 +41,10 @@ public class Course {
     @Column(name = "students")
     @OneToMany(
             cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "course_id",
+            referencedColumnName = "id"
     )
     private List<Student> students;
 

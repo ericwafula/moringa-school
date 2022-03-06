@@ -61,7 +61,7 @@ public class CourseController {
         if (confirmStudentExists == null) {
             throw new StudentNotFoundException("can't add student to course because student doesn't exist");
         } else {
-            student.setCourseId(courseId);
+//            student.setCourseId(courseId);
             course.addStudent(student);
             courseService.updateCourseById(courseId, course);
         }
