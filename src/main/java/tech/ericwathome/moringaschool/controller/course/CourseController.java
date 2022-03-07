@@ -109,7 +109,7 @@ public class CourseController {
         return student;
     }
 
-    @PutMapping("/course/id/{courseId}/technical-mentors/technical-mentor/new/{technicalMentorId}")
+    @PutMapping("/course/id/{courseId}/technical-mentors/technical-mentor/id/{technicalMentorId}/new")
     public TechnicalMentor addTechnicalMentorToCourse(@PathVariable("courseId") Long courseId, @PathVariable("technicalMentorId") Long technicalMentorId) throws CourseNotFoundException, TechnicalMentorNotFoundException {
         Course course = courseService.findCourseById(courseId);
         TechnicalMentor technicalMentor = technicalMentorService.findTechnicalMentorById(technicalMentorId);

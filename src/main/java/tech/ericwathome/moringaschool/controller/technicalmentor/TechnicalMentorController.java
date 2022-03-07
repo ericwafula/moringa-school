@@ -10,6 +10,7 @@ import tech.ericwathome.moringaschool.error.TechnicalMentorNotFoundException;
 import tech.ericwathome.moringaschool.service.course.CourseService;
 import tech.ericwathome.moringaschool.service.technicalmentor.TechnicalMentorService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -44,12 +45,27 @@ public class TechnicalMentorController {
         return technicalMentorService.findTechnicalMentorsByContainedCharacters(name);
     }
 
+    @GetMapping("/technical-mentor/id/{technicalMentorId}/courses")
+    List<Course> listAllCoursesAssignedToTechnicalMentor(@PathVariable("technicalMentorId") Long technicalMentorId) throws TechnicalMentorNotFoundException {
+        TechnicalMentor technicalMentor = technicalMentorService.findTechnicalMentorById(technicalMentorId);
+        List<Course> allCourses = technicalMentor.getCourses();
+        if (allCourses.isEmpty()) {
+            Course emptyCourseListMessage = Course.builder()
+                    .name("No courses assigned to technical mentor")
+                    .build();
+            List<Course> emptyCourseList = new ArrayList<>();
+            emptyCourseList.add(emptyCourseListMessage);
+            return emptyCourseList;
+        }
+        return allCourses;
+    }
+
     @PutMapping("/technical-mentor/id/{id}")
     public TechnicalMentor updateTechnicalMentorById(@PathVariable("id") Long id, @RequestBody TechnicalMentor updatedTechnicalMentor) throws TechnicalMentorNotFoundException {
         return technicalMentorService.updateTechnicalMentorById(id, updatedTechnicalMentor);
     }
 
-    @PutMapping("/technical-mentor/id/{technicalMentorId}/course/id/{courseId}")
+    @PutMapping("/technical-mentor/id/{technicalMentorId}/courses/course/id/{courseId}/new")
     public Course assignCourseToTechnicalMentor(@PathVariable("technicalMentorId") Long technicalMentorId, @PathVariable("courseId") Long courseId) throws TechnicalMentorNotFoundException, CourseNotFoundException {
         TechnicalMentor technicalMentor = technicalMentorService.findTechnicalMentorById(technicalMentorId);
         Course course = courseService.findCourseById(courseId);
