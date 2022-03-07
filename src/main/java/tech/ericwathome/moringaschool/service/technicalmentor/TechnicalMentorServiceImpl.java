@@ -45,7 +45,7 @@ public class TechnicalMentorServiceImpl implements TechnicalMentorService {
     @Override
     public TechnicalMentor findTechnicalMentorById(Long id) throws TechnicalMentorNotFoundException {
         Optional<TechnicalMentor> technicalMentor = technicalMentorRepository.findById(id);
-        if (technicalMentor.isEmpty()) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
+        if (technicalMentor.get().getName().equals("") && technicalMentor.get().getEmail().equals("")) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
         return technicalMentor.get();
     }
 
@@ -68,7 +68,7 @@ public class TechnicalMentorServiceImpl implements TechnicalMentorService {
     @Override
     public TechnicalMentor updateTechnicalMentorById(Long id, TechnicalMentor updatedTechnicalMentor) throws TechnicalMentorNotFoundException {
         Optional<TechnicalMentor> technicalMentor = technicalMentorRepository.findById(id);
-        if (technicalMentor.isEmpty()) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
+        if (technicalMentor.get().getName().equals("") && technicalMentor.get().getEmail().equals("")) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
         if (!updatedTechnicalMentor.getName().isEmpty()) {
             technicalMentor.get().setName(updatedTechnicalMentor.getName());
         }
@@ -81,7 +81,7 @@ public class TechnicalMentorServiceImpl implements TechnicalMentorService {
     @Override
     public TechnicalMentor deleteTechnicalMentorById(Long id) throws TechnicalMentorNotFoundException {
         Optional<TechnicalMentor> technicalMentor = technicalMentorRepository.findById(id);
-        if (technicalMentor.isEmpty()) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
+        if (technicalMentor.get().getName().equals("") && technicalMentor.get().getEmail().equals("")) throw new TechnicalMentorNotFoundException("No technical mentor found with provided id");
         technicalMentorRepository.deleteById(id);
         return technicalMentor.get();
     }

@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findStudentById(Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.isEmpty()) throw new StudentNotFoundException("no student matches the provided id");
+        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("no student matches the provided id");
         return student.get();
     }
 
@@ -64,7 +64,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student updateStudentById(Long id, Student studentUpdate) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.isEmpty()) throw new StudentNotFoundException("no student matches the provided id");
+        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("no student matches the provided id");
         if (!studentUpdate.getName().isEmpty()) {
             student.get().setName(studentUpdate.getName());
         }
@@ -91,7 +91,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student deleteStudentById(Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.isEmpty()) throw new StudentNotFoundException("cannot delete student with non-existent id");
+        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("cannot delete student with non-existent id");
         studentRepository.deleteById(id);
         return student.get();
     }

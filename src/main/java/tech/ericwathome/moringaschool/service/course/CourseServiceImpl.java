@@ -43,7 +43,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findCourseById(Long courseId) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(courseId);
-        if (course.isEmpty()) throw new CourseNotFoundException("no course found with provided id");
+        if (course.get().getName().equals("")) {
+            throw new CourseNotFoundException("no course found with provided id");
+        }
         return course.get();
     }
 
@@ -57,7 +59,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course updateCourseById(Long id, Course updatedCourse) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(id);
-        if (course.isEmpty()) throw new CourseNotFoundException("no course found with provided id");
+        if (course.get().getName().equals("")) throw new CourseNotFoundException("no course found with provided id");
         if (!updatedCourse.getName().isEmpty()) {
             course.get().setName(updatedCourse.getName());
         }
@@ -79,7 +81,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course deleteCourseById(Long courseId) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(courseId);
-        if (course.isEmpty()) throw new CourseNotFoundException("no course found with provided id");
+        if (course.get().getName().equals("")) throw new CourseNotFoundException("no course found with provided id");
         courseRepository.deleteById(courseId);
         return course.get();
     }
