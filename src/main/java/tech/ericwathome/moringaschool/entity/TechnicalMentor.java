@@ -1,11 +1,13 @@
 package tech.ericwathome.moringaschool.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -39,4 +41,12 @@ public class TechnicalMentor {
             nullable = false
     )
     private String email;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "technicalMentors")
+    private List<Course> courses;
+
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
 }

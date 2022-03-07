@@ -48,7 +48,18 @@ public class Course {
     )
     private List<Student> students;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "course_technical_mentor",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "technical_mentor_id")
+    )
+    private List<TechnicalMentor> technicalMentors;
+
     public void addStudent(Student student) {
         students.add(student);
+    }
+    public void addTechnicalMentor(TechnicalMentor technicalMentor) {
+        technicalMentors.add(technicalMentor);
     }
 }
