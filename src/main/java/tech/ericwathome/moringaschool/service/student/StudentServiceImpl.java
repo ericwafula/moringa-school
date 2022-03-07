@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) throws EmptyParameterException {
-        if (student.getName().isEmpty() || student.getEmail().isEmpty()) {
+        if (student.getName().equals("") || student.getEmail().isEmpty()) {
             throw new EmptyParameterException("can not save student with an empty parameter");
         } else {
             studentRepository.save(student);
