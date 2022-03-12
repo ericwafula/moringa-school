@@ -23,7 +23,7 @@ I've grouped the API into different submodules that contain individual API's wit
 ## Known Bugs
 if any issue arises, I'll make sure to mention them otherwise I've encountered none at the moment.
 ## Technologies Used
-JDK17, Springboot, PostgreSQL
+JDK8, Springboot, PostgreSQL
 ## Support and contact details
 You can reach out via ericwathome007@gmail.com
 ### License
