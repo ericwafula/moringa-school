@@ -1,5 +1,5 @@
 # Moringa School API
-#### Moringa School API for SD/TM apprentice position interview, 7/03/2022
+#### Moringa School API 7/03/2022
 #### By Eric Wafula
 ## Description
 This is a Springboot/SpringMVC API that simulates how Students and their respective Technical Mentors are enrolled in Moringa School. The API uses an N-Tier architecture and has been implemented following RestFul principles and has all the basic CRUD operations.
