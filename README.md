@@ -14,6 +14,8 @@ I've grouped the API into different submodules that contain individual API's wit
 
  To get the full list of API's and their respective endpoints, follow this link: [https://moringa-school-eric.herokuapp.com/](https://moringa-school-eric.herokuapp.com/)
 
+Click this link for the swagger documentation [https://moringa-school-eric.herokuapp.com/swagger-ui.html](https://moringa-school-eric.herokuapp.com/swagger-ui.html)
+
 ## Setup/Installation Requirements
 * git clone https://github.com/ericwafula/moringa-school.git
 * open with preferred IDE or text editor. I recommend using Intellij IDEA
