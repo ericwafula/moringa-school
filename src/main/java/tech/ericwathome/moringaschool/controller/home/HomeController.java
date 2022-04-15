@@ -10,7 +10,7 @@ public class HomeController {
     @GetMapping
     public String homeEndpoint() {
         return "<div style='padding-left:48px;padding-right-48px;'>" +
-                "<h1 style='text-align:center;margin-top:70px;'>Moringa School API Version 0.0.1</h1>" +
+                "<h1 style='text-align:center;margin-top:70px;'>Moringa School API Version 1.0.1</h1>" +
                 "<p style='font-size:24px'>Below are the different end points that showcase how the API works</p>" +
                 "<p style='font-size:24px;font-weight:bold;'>Student API</p>" +
                 "<p>add student - <a href='https://moringa-school-eric.herokuapp.com/api/v1/students/student/new'>https://moringa-school-eric.herokuapp.com/api/v1/students/student/new</a></p>" +
@@ -38,7 +38,7 @@ public class HomeController {
                 "<p>add new technical mentors - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/new'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/new</a></p>" +
                 "<p>get all technical mentors - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors</a></p>" +
                 "<p>find technical mentor by id - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1</a></p>" +
-                "<p>displays a list of technical mentors by corresponding characters in their name<a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/name/gi'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/name/gi</a></p>" +
+                "<p>displays a list of technical mentors by corresponding characters in their name - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/name/gi'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/name/gi</a></p>" +
                 "<p>update technical mentor by id - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1</a></p>" +
                 "<p>delete technical mentor by id - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1</a></p>" +
                 "<p>assign course to technical mentor - <a href='https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1/courses/course/id/1/new'>https://moringa-school-eric.herokuapp.com/api/v1/technical-mentors/technical-mentor/id/1/courses/course/id/1/new</a></p>" +

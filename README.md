@@ -19,7 +19,7 @@ I've grouped the API into different submodules that contain individual API's wit
 * open with preferred IDE or text editor. I recommend using Intellij IDEA
 * sync project
 * click run application to start a local tomcat server
-* the application uses java 1.8, so it should be compatible with the java version you are using. If you wish to use a different JDK version however, you can change the project's java version in the pom xml
+* the application uses java 17, so it should be compatible with the java version you are using. If you wish to use a different JDK version however, you can change the project's java version in the pom xml
 ## Known Bugs
 if any issue arises, I'll make sure to mention them otherwise I've encountered none at the moment.
 ## Technologies Used

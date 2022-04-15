@@ -50,21 +50,21 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findStudentById(Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("no student matches the provided id");
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_ID: " + id));
         return student.get();
     }
 
     @Override
     public Student findStudentByEmail(String studentEmail) throws StudentNotFoundException {
-        Student student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
-        if (student == null) throw new StudentNotFoundException("no student matches the provided email address");
-        return student;
+        Optional<Student> student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_EMAIL: " + studentEmail));
+        return student.get();
     }
 
     @Override
     public Student updateStudentById(Long id, Student studentUpdate) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("no student matches the provided id");
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_ID: " + id));
         if (!studentUpdate.getName().isEmpty()) {
             student.get().setName(studentUpdate.getName());
         }
@@ -77,31 +77,31 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudentByEmail(String studentEmail, Student studentUpdate) throws StudentNotFoundException {
-        Student student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
-        if (student == null) throw new StudentNotFoundException("no student matches the provided email address");
+        Optional<Student> student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_EMAIL: " + studentEmail));
         if (!studentUpdate.getName().isEmpty()) {
-            student.setName(studentUpdate.getName());
+            student.get().setName(studentUpdate.getName());
         }
         if (!studentUpdate.getEmail().isEmpty()) {
-            student.setEmail(studentUpdate.getEmail());
+            student.get().setEmail(studentUpdate.getEmail());
         }
-        return studentRepository.save(student);
+        return studentRepository.save(student.get());
     }
 
     @Override
     public Student deleteStudentById(Long id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.get().getName().equals("") && student.get().getEmail().equals("")) throw new StudentNotFoundException("cannot delete student with non-existent id");
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_ID: " + id));
         studentRepository.deleteById(id);
         return student.get();
     }
 
     @Override
     public Student deleteStudentByEmail(String studentEmail) throws StudentNotFoundException {
-        Student student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
-        if (student == null) throw new StudentNotFoundException("cannot delete student with non-existent email address");
-        Long id = student.getId();
+        Optional<Student> student = studentRepository.findStudentByEmailIgnoreCase(studentEmail);
+        student.orElseThrow(() -> new StudentNotFoundException("NO_STUDENT_FOUND_WITH_PROVIDED_EMAIL: " + studentEmail));
+        Long id = student.get().getId();
         studentRepository.deleteById(id);
-        return student;
+        return student.get();
     }
 }
