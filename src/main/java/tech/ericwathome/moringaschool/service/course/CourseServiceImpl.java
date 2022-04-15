@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tech.ericwathome.moringaschool.entity.Course;
 import tech.ericwathome.moringaschool.error.CourseNotFoundException;
 import tech.ericwathome.moringaschool.error.EmptyParameterException;
+import tech.ericwathome.moringaschool.error.TechnicalMentorNotFoundException;
 import tech.ericwathome.moringaschool.repository.course.CourseRepository;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findCourseById(Long courseId) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(courseId);
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_ID: " + courseId));
         if (course.get().getName().equals("")) {
             throw new CourseNotFoundException("no course found with provided id");
         }
@@ -51,15 +53,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course findCourseByName(String name) throws CourseNotFoundException {
-        Course course = courseRepository.findCourseByNameIgnoreCase(name);
-        if (course == null) throw new CourseNotFoundException("no course found with provided name");
-        return course;
+        Optional<Course> course = courseRepository.findCourseByNameIgnoreCase(name);
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_NAME: " + name));
+        return course.get();
     }
 
     @Override
     public Course updateCourseById(Long id, Course updatedCourse) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(id);
-        if (course.get().getName().equals("")) throw new CourseNotFoundException("no course found with provided id");
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_ID: " + id));
         if (!updatedCourse.getName().isEmpty()) {
             course.get().setName(updatedCourse.getName());
         }
@@ -69,29 +71,29 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course updateCourseByName(String name, Course updatedCourse) throws CourseNotFoundException {
-        Course course = courseRepository.findCourseByNameIgnoreCase(name);
-        if (course == null) throw new CourseNotFoundException("no course found with provided name");
+        Optional<Course> course = courseRepository.findCourseByNameIgnoreCase(name);
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_NAME: " + name));
         if (!updatedCourse.getName().isEmpty()) {
-            course.setName(updatedCourse.getName());
+            course.get().setName(updatedCourse.getName());
         }
-        courseRepository.save(course);
-        return course;
+        courseRepository.save(course.get());
+        return course.get();
     }
 
     @Override
     public Course deleteCourseById(Long courseId) throws CourseNotFoundException {
         Optional<Course> course = courseRepository.findById(courseId);
-        if (course.get().getName().equals("")) throw new CourseNotFoundException("no course found with provided id");
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_ID: " + courseId));
         courseRepository.deleteById(courseId);
         return course.get();
     }
 
     @Override
     public Course deleteCourseByName(String courseName) throws CourseNotFoundException {
-        Course course = courseRepository.findCourseByNameIgnoreCase(courseName);
-        if (course == null) throw new CourseNotFoundException("no course found with provided name");
-        Long id = course.getId();
+        Optional<Course> course = courseRepository.findCourseByNameIgnoreCase(courseName);
+        course.orElseThrow(() -> new CourseNotFoundException("NO_COURSE_FOUND_WITH_NAME: " + courseName));
+        Long id = course.get().getId();
         courseRepository.deleteById(id);
-        return course;
+        return course.get();
     }
 }
