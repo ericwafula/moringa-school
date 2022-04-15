@@ -26,7 +26,7 @@ import javax.persistence.*;
         }
 )
 public class Student {
-    @Id()
+    @Id
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",
